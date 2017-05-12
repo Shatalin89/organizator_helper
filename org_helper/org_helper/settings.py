@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'org_helper_api',
     'clients_base',
+    'main_helper',
 ]
 
 MIDDLEWARE = [
