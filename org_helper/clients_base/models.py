@@ -3,12 +3,17 @@ from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 
 
-class Users(models.Model):
+class Clients(models.Model):
+
+    class Meta:
+        db_table = 'clients'
     last_name = models.CharField(max_length=30)
     first_name = models.CharField(max_length=30)
     middle_name = models.CharField(max_length=30, blank=True)
     date_birthday = models.DateField(blank=True)
     phone = PhoneNumberField(blank=True)
+    email = models.EmailField(blank=True)
+    description = models.TextField(max_length=300, blank=True)
     vk_id = models.URLField(blank=True)
     fb_id = models.URLField(blank=True)
     insta_id = models.URLField(blank=True)

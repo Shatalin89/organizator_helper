@@ -1,7 +1,36 @@
-{% import 'main.html' %}
+{% extends 'main.html' %}
+
+
+{% block title %}
+        Список клиентов
+{% endblock %}
 
 {% block content %}
-`
-список клиентов
-
+    {% load staticfiles %}
+    <div class="col-md-10">
+        <table id="users_list" class="table-striped table">
+            <caption>Список клиентов<caption>
+            <tr>
+                <th>ФИО</th>
+                <th>Телефон</th>
+                <th>Почта</th>
+                <th>О клиенте</th>
+                <th>Редактировать</th>
+                <th>Удалить</th>
+            </tr>
+            {% if clients %}
+                {% for client in clients %}
+                    <tr>
+                        <td><a href="#">{{ client.get_fio }}</a></td>
+                        <td>{{ client.phone | phone2numeric }}</td>
+                        <td>{{ client.email }}</td>
+                        <td>{{ client.description }}</td>
+                        <td><a href="#"><img width="20px" height="20px" src="{% static '/icon/edit.png' %}"></a></td>
+                        <td><a href="#"><img width="20px" height="20px" src="{% static '/icon/del.png' %}"></a></td>
+                    </tr>
+                {% endfor%}
+            {% endif %}
+            <tr><td colspan="6"><a href="#">Добавить клиента</a></td></tr>
+        </table>
+    </div>
 {% endblock %}
