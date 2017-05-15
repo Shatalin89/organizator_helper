@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+
+
+{% block title %}
+    Добавить клиента
+{% endblock %}
+
+{% block content %}
+<div class="col-md-10">
+    <form class="form-horizontal">
+        {% for field in form %}
+         <div class="form-group">
+             <label class="control-label col-sm-3">{{ field.label }}:</label>
+             <div class="col-sm-7">
+                {{ field }}
+             </div>
+         </div>
+        {% endfor %}
+    </form>
+
+</div>
+{% endblock %}

@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
-
+from datetime import datetime
+from django.utils import timezone
 
 class Clients(models.Model):
 
@@ -17,6 +18,7 @@ class Clients(models.Model):
     vk_id = models.URLField(blank=True)
     fb_id = models.URLField(blank=True)
     insta_id = models.URLField(blank=True)
+    date_add = models.DateTimeField(default=timezone.now)
 
     def get_fio(self):
         return '{0} {1}.{2}.'.format(self.last_name, self.first_name[:1], self.middle_name[:1])

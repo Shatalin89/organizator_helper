@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'org_helper_api',
     'clients_base',
     'main_helper',
+    'bootstrapform',
 ]
 
 MIDDLEWARE = [
