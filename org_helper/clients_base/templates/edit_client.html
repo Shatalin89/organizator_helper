@@ -2,17 +2,13 @@
 {% load staticfiles %}
 
 
-{% block title %}
-    Добавить клиента
-{% endblock %}
 
 {% block content %}
 <div class="col-md-10">
-    <form class="form-horizontal" method="post" action="{% url 'client' %}">
+    <form class="form-horizontal" method="post" action="{% url 'edit_client' client.id %}">
         {% csrf_token %}
         {% include 'inc-client.html' %}
     </form>
-
 
 </div>
 

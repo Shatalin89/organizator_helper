@@ -22,10 +22,10 @@
                 {% for client in clients %}
                     <tr>
                         <td><a href="#">{{ client.get_fio }}</a></td>
-                        <td>{{ client.phone | phone2numeric }}</td>
+                        <td>{{ client.phone }}</td>
                         <td>{{ client.email }}</td>
                         <td>{{ client.description }}</td>
-                        <td><a href="#"><img width="20px" height="20px" src="{% static '/icon/edit.png' %}"></a></td>
+                        <td><a href="{% url 'edit_client' client.id %}"><img width="20px" height="20px" src="{% static '/icon/edit.png' %}"></a></td>
                         <td><a href="#"><img width="20px" height="20px" src="{% static '/icon/del.png' %}"></a></td>
                     </tr>
                 {% endfor%}

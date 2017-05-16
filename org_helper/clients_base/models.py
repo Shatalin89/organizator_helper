@@ -15,9 +15,9 @@ class Clients(models.Model):
     phone = PhoneNumberField(blank=True)
     email = models.EmailField(blank=True)
     description = models.TextField(max_length=300, blank=True)
-    vk_id = models.URLField(blank=True)
-    fb_id = models.URLField(blank=True)
-    insta_id = models.URLField(blank=True)
+    vk_id = models.URLField(blank=True, null=True)
+    fb_id = models.URLField(blank=True, null=True)
+    insta_id = models.URLField(blank=True, null=True)
     date_add = models.DateTimeField(default=timezone.now)
 
     def get_fio(self):
