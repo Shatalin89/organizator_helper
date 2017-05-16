@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^$', views.get_clients, name='clients'),
     url(r'^add/$', views.add_client, name='client'),
     url(r'^edit/(?P<clients_id>\d+)/$', views.edit_client, name='edit_client'),
+    url(r'^del/(?P<clients_id>\d+)/$', views.del_client, name='del_client'),
 ]

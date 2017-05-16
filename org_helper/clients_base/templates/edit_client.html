@@ -1,8 +1,13 @@
 {% extends 'main.html' %}
 {% load staticfiles %}
 
+{% block title %}
+    {{ client.get_fio }}
+{% endblock %}
+
 {% block content %}
 <div class="col-md-10">
+    <h4 class="lead">Подробнее о: {{ client.get_fio }}</h4>
     <form class="form-horizontal" method="post" action="{% url 'edit_client' client.id %}">
         {% csrf_token %}
         {% include 'inc-client.html' %}

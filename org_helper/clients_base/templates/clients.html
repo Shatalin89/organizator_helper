@@ -9,28 +9,40 @@
     {% load staticfiles %}
     <div class="col-md-10">
         <table id="users_list" class="table-striped table">
-            <caption>Список клиентов<caption>
+            <h4 class="lead">Список клиентов</h4>
             <tr>
-                <th>ФИО</th>
-                <th>Телефон</th>
-                <th>Почта</th>
-                <th>О клиенте</th>
-                <th>Редактировать</th>
-                <th>Удалить</th>
+                <th class="col-xs-2">ФИО</th>
+                <th class="col-xs-1">Телефон</th>
+                <th class="col-xs-2">Почта</th>
+                <th class="col-xs-2">О клиенте</th>
+                <th class="col-xs-1">Соц. сети</th>
+                <th class="col-xs-1">Ред.</th>
+                <th class="col-xs-1">Удалить</th>
             </tr>
             {% if clients %}
                 {% for client in clients %}
                     <tr>
-                        <td><a href="#">{{ client.get_fio }}</a></td>
-                        <td>{{ client.phone }}</td>
-                        <td>{{ client.email }}</td>
-                        <td>{{ client.description }}</td>
-                        <td><a href="{% url 'edit_client' client.id %}"><img width="20px" height="20px" src="{% static '/icon/edit.png' %}"></a></td>
-                        <td><a href="#"><img width="20px" height="20px" src="{% static '/icon/del.png' %}"></a></td>
+                        <td class="col-xs-2"><a href="#">{{ client.get_fio }}</a></td>
+                        <td class="col-xs-1">{{ client.phone }}</td>
+                        <td class="col-xs-2">{{ client.email }}</td>
+                        <td class="col-xs-3">{{ client.description }}</td>
+                        <td class="col-xs-2"><a href="{{ client.fb_id }}" target="_blank" class="btn btn-social-icon btn-xs btn-facebook">
+                                                <span class="fa fa-facebook"></span>
+                                            </a>
+                                            <a href="{{ client.vk_id }}" target="_blank" class="btn btn-social-icon btn-xs btn-vk">
+                                                <span class="fa fa-vk"></span>
+                                            </a>
+                                            <a href="{{ client.insta_id }}" target="_blank" class="btn btn-social-icon btn-xs btn-instagram">
+                                                <span class="fa fa-instagram"></span>
+                                            </a>
+                        </td>
+                        <td class="col-xs-1"><a href="{% url 'edit_client' client.id %}"><img width="20px" height="20px" src="{% static '/icon/edit.png' %}"></a></td>
+                        <td class="col-xs-1"><a href="{% url 'del_client' client.id %}"><img width="20px" height="20px" src="{% static '/icon/del.png' %}"></a></td>
+
                     </tr>
                 {% endfor%}
             {% endif %}
-            <tr><td colspan="6"><a href="{% url 'client' %}">Добавить клиента</a></td></tr>
+            <tr><td colspan="7"><a href="{% url 'client' %}">Добавить клиента</a></td></tr>
         </table>
     </div>
 {% endblock %}
