@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+        Список залов
+{% endblock %}
+
+{% block content %}
+    {% load staticfiles %}
+
+    <div class="col-md-10">
+        <table id="halls_list" class="table-striped table">
+            <h4 class="lead">Список залов</h4>
+            <tr>
+                <th class="col-xs-2">Название</th>
+                <th class="col-xs-2">Адресс</th>
+                <th class="col-xs-2">Телефон</th>
+                <th class="col-xs-1">Емкость</th>
+                <th class="col-xs-1">Цена</th>
+                <th class="col-xs-1">Ред.</th>
+                <th class="col-xs-1">Удалить</th>
+            </tr>
+            {% if halls %}
+                {% for hall in halls %}
+            <tr>
+                <td class="col-xs-2">{{ hall.hall_name }}</td>
+                <td class="col-xs-2">{{ hall.hall_address }}</td>
+                <td class="col-xs-1">{{ hall.hall_phone }}</td>
+                <td class="col-xs-2">{{ hall.hall_max_places }}</td>
+                <td class="col-xs-1">{{ hall.hall_price_in_hour }}</td>
+                <td class="col-xs-1"><a href="#"><img width="20px" height="20px" src="{% static '/icon/edit.png' %}"></a></td>
+                <td class="col-xs-1"><a href="#"><img width="20px" height="20px" src="{% static '/icon/del.png' %}"></a></td>
+            </tr>
+                {% endfor%}
+            {% endif %}
+            <tr><td colspan="7"><a href="{% url 'hall' %}">Добавить залл</a></td></tr>
+        </table>
+    </div>
+{% endblock %}
