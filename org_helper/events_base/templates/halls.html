@@ -28,8 +28,8 @@
                 <td class="col-xs-1">{{ hall.hall_phone }}</td>
                 <td class="col-xs-2">{{ hall.hall_max_places }}</td>
                 <td class="col-xs-1">{{ hall.hall_price_in_hour }}</td>
-                <td class="col-xs-1"><a href="#"><img width="20px" height="20px" src="{% static '/icon/edit.png' %}"></a></td>
-                <td class="col-xs-1"><a href="#"><img width="20px" height="20px" src="{% static '/icon/del.png' %}"></a></td>
+                <td class="col-xs-1"><a href="{% url 'edit_hall' hall.id %}"><img width="20px" height="20px" src="{% static '/icon/edit.png' %}"></a></td>
+                <td class="col-xs-1"><a href="{% url 'del_hall' hall.id %}"><img width="20px" height="20px" src="{% static '/icon/del.png' %}"></a></td>
             </tr>
                 {% endfor%}
             {% endif %}

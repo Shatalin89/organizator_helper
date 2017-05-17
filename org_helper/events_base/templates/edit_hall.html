@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ hall.hall_name }}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-10">
+    <h4 class="lead">Подробнее о: {{ hall.hall_name }}</h4>
+    <form class="form-horizontal" method="post" action="{% url 'edit_hall' hall.id %}">
+        {% csrf_token %}
+        {% include 'inc-client.html' %}
+    </form>
+</div>
+
+<script src="{% static 'js/bootstrap-formhelpers-phone.js' %}"></script>
+{% endblock %}
