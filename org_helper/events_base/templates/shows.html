@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+        Список залов
+{% endblock %}
+
+{% block content %}
+    {% load staticfiles %}
+
+    <div class="col-md-10">
+        <table id="halls_list" class="table-striped table">
+            <h4 class="lead">Список залов</h4>
+            <tr>
+                <th class="col-xs-3">Название</th>
+                <th class="col-xs-2">Длительность</th>
+                <th class="col-xs-4">Описание</th>
+                <th class="col-xs-1">Ред.</th>
+                <th class="col-xs-1">Удалить</th>
+            </tr>
+            {% if shows %}
+                {% for show in shows %}
+            <tr>
+                <td class="col-xs-3">{{ show.shows_name }}</td>
+                <td class="col-xs-2">{{ show.shows_time_length }}</td>
+                <td class="col-xs-4">{{ show.shows_description }}</td>
+                <td class="col-xs-1"><a href="{% url 'edit_show' show.id %}"><img width="20px" height="20px" src="{% static '/icon/edit.png' %}"></a></td>
+                <td class="col-xs-1"><a href="{% url 'del_show' show.id %}"><img width="20px" height="20px" src="{% static '/icon/del.png' %}"></a></td>
+            </tr>
+                {% endfor%}
+            {% endif %}
+            <tr><td colspan="7"><a href="{% url 'show' %}">Добавить залл</a></td></tr>
+        </table>
+    </div>
+{% endblock %}

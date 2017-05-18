@@ -21,3 +21,10 @@ class HallForm(forms.ModelForm):
     class Meta:
         model = models.Hall
         exclude = []
+
+
+class ShowForm(forms.ModelForm):
+
+    class Meta:
+        model = models.Shows
+        exclude = []

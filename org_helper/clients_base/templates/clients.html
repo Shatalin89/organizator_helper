@@ -44,5 +44,18 @@
             {% endif %}
             <tr><td colspan="7"><a href="{% url 'client' %}">Добавить клиента</a></td></tr>
         </table>
+
+            <ul class="pagination pagination-sm">
+                    {% if products.has_previous %}
+                        <li><a href="?page={{ clients.previous_page_number }}">{{ clients.previous_page_number }}</a></li>
+                    {% endif %}
+                    <li class="active">
+                        {{ clients.number }}
+                    </li>
+                    {% if products.has_next %}
+                        <li><a href="?page={{ clients.next_page_number }}">{{ clients.next_page_number }}</a></li>
+                    {% endif %}
+            </ul>
+
     </div>
 {% endblock %}

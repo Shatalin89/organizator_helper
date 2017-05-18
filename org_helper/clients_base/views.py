@@ -4,12 +4,20 @@ from django.shortcuts import render_to_response
 # Create your views here.
 from . import models
 from . import forms
-from django.shortcuts import redirect
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def get_clients(request):
     clients = models.Clients.objects.all()
-    return render(request, 'clients.html', {'clients' : clients})
+    paginator = Paginator(clients, 20)
+    page = request.GET.get('page')
+    try:
+        client = paginator.page(page)
+    except PageNotAnInteger:
+        client = paginator.page(1)
+    except EmptyPage:
+        client = paginator.page(paginator.num_pages)
+    return render(request, 'clients.html', {'clients' : client})
 
 
 def add_client(request):
