@@ -22,8 +22,12 @@ class HallForm(forms.ModelForm):
         model = models.Hall
         exclude = []
 
-
 class ShowForm(forms.ModelForm):
+    shows_name = forms.CharField(label=u'Название', widget=forms.TextInput(attrs={'placeholder': 'Название', 'class': 'form-control'}))
+    shows_time_length = forms.CharField(label=u'Длительность', widget=forms.TextInput(attrs={'class': 'form-controlglyphicon glyphicon-calendar'}))
+    shows_description = forms.CharField(label=u'Описание',
+                                 widget=forms.Textarea(attrs={'placeholder': 'Описание', 'class': 'form-control'}))
+    shows_image = forms.ImageField(label=u'Афиша',widget=forms.FileInput(attrs={'placeholder': 'Афиша', 'class': 'btn btn-secondary'}))
 
     class Meta:
         model = models.Shows

@@ -2,12 +2,13 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from . import models
 from . import forms
+from django.urls import reverse
 # Create your views here.
-from django.core.urlresolvers import reverse
+
 
 def get_halls(request):
     halls = models.Hall.objects.all()
-    return render(request, 'halls.html', {'halls': halls})
+    return render(request, 'halls/halls.html', {'halls': halls})
 
 
 def add_hall(request):
@@ -18,7 +19,7 @@ def add_hall(request):
             return HttpResponseRedirect(reverse('halls'))
     else:
         form = forms.HallForm()
-    return render(request, 'hall.html', {'form': form})
+    return render(request, 'halls/hall.html', {'form': form})
 
 
 def edit_hall(request, hall_id):
@@ -30,7 +31,7 @@ def edit_hall(request, hall_id):
             return HttpResponseRedirect(reverse('halls'))
     else:
         form = forms.HallForm(instance=hall)
-    return render(request, 'edit_hall.html', {'form': form, 'hall': hall})
+    return render(request, 'halls/edit_hall.html', {'form': form, 'hall': hall})
 
 
 def del_hall(request, hall_id):
@@ -41,7 +42,8 @@ def del_hall(request, hall_id):
 
 def get_shows(request):
     shows = models.Shows.objects.all()
-    return render(request, 'shows.html', {'shows': shows})
+    return render(request, 'shows/shows.html', {'shows': shows})
+
 
 def add_show(request):
     if request.method == 'POST':
@@ -50,10 +52,11 @@ def add_show(request):
             form.save()
             return HttpResponseRedirect(reverse('shows'))
     else:
-        form = forms.HallForm()
-    return render(request, 'show.html', {'form': form})
+        form = forms.ShowForm()
+    return render(request, 'shows/show.html', {'form': form})
 
-def edit_show(request):
+
+def edit_show(request, show_id):
     pass
 
 def del_show(request):

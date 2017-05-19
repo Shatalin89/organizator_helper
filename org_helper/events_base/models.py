@@ -20,6 +20,13 @@ class Hall(models.Model):
 class Shows(models.Model):
     class Meta:
         db_table = 'shows'
+
     shows_name = models.CharField(max_length = 100)
     shows_time_length = models.TimeField(default='01:00')
-    shows_description = models.TimeField(blank=True, null=True)
+    shows_description = models.CharField(max_length = 400, blank=True, null=True)
+    shows_image = models.ImageField(upload_to='/media/', blank=True, null=True)
+
+
+
+
+
