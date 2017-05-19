@@ -42,12 +42,14 @@ def del_hall(request, hall_id):
 
 def get_shows(request):
     shows = models.Shows.objects.all()
+    for i in shows:
+        print(i.shows_names)
     return render(request, 'shows/shows.html', {'shows': shows})
 
 
 def add_show(request):
     if request.method == 'POST':
-        form = forms.ShowForm(request.POST)
+        form = forms.ShowForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('shows'))
@@ -57,7 +59,17 @@ def add_show(request):
 
 
 def edit_show(request, show_id):
-    pass
+    shows = get_object_or_404(models.Shows, id=show_id)
+    if request.method == "POST":
+        form = forms.ShowForm(request.POST, instance=shows)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('shows'))
+    else:
+        form = forms.ShowForm(instance=shows)
+    return render(request, 'shows/edit_show.html', {'form': form, 'shows': shows})
 
-def del_show(request):
-    pass
+def del_show(request, show_id):
+    show = models.Shows.objects.get(id=show_id)
+    show.delete()
+    return HttpResponseRedirect(reverse('shows'))
