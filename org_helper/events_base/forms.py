@@ -32,3 +32,9 @@ class ShowForm(forms.ModelForm):
     class Meta:
         model = models.Shows
         exclude = []
+
+
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = models.EventsInfo
+        exclude = []

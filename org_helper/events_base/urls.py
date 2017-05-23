@@ -14,4 +14,9 @@ urlpatterns = [
     url(r'^shows/edit/(?P<show_id>\d+)/$', views.edit_show, name='edit_show'),
     url(r'^shows/del/(?P<show_id>\d+)/$', views.del_show, name='del_show'),
 
+    url(r'^info/$', views.get_info, name='events'),
+    url(r'^info/add/$', views.add_info, name='event'),
+    url(r'^info/edit/(?P<info_id>\d+)/$', views.edit_info, name='edit_event'),
+    url(r'^info/del/(?P<info_id>\d+)/$', views.del_info, name='del_event'),
+
 ]

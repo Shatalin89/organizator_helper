@@ -12,7 +12,7 @@
     <h4 class="lead">Новое мероприятие</h4>
     <form class="form-horizontal" method="post" action="{% url 'show' %}">
         {% csrf_token %}
-        {% include 'shows/inc-show.html' %}
+        {% include 'inc-admin_form.html' %}
     </form>
 </div>
 

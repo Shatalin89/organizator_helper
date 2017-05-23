@@ -12,7 +12,6 @@ class Hall(models.Model):
     hall_phone = PhoneNumberField(blank=True, null=True)
     hall_price_in_hour = models.IntegerField(blank=True, null=True)
     hall_url = models.URLField(blank=True, null=True)
-
     def __str__(self):
         return self.hall_name
 
@@ -26,7 +25,7 @@ class Shows(models.Model):
     shows_image = models.ImageField(upload_to='media/', blank=True, null=True)
 
     def __str__(self):
-        return self.shows_name
+        return self.shows_names
 
 
 class EventsInfo(models.Model):
@@ -34,10 +33,11 @@ class EventsInfo(models.Model):
         db_table = 'events'
 
     events_show_name = models.ForeignKey(Shows)
+    events_hall = models.ForeignKey(Hall)
     events_date_time = models.DateTimeField(default=timezone.now)
     event_place_count = models.IntegerField(default=15)
+    event_place_current_count = models.IntegerField(default=0)
     event_vk_url = models.URLField(blank=True, null=True)
-
 
 
 class EventPlace(models.Model):

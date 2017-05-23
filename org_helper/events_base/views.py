@@ -42,8 +42,6 @@ def del_hall(request, hall_id):
 
 def get_shows(request):
     shows = models.Shows.objects.all()
-    for i in shows:
-        print(i.shows_names)
     return render(request, 'shows/shows.html', {'shows': shows})
 
 
@@ -73,3 +71,34 @@ def del_show(request, show_id):
     show = models.Shows.objects.get(id=show_id)
     show.delete()
     return HttpResponseRedirect(reverse('shows'))
+
+
+def get_info(request):
+    infos = models.EventsInfo.objects.all()
+    return render(request, 'eventsinfo/eventsinfo.html', {'infos': infos})
+
+def add_info(request):
+    if request.method == 'POST':
+        form = forms.EventForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('events'))
+    else:
+        form = forms.EventForm()
+    return render(request, 'eventsinfo/eventinfo.html', {'form': form})
+
+def edit_info(request, info_id):
+    event = get_object_or_404(models.EventsInfo, id=info_id)
+    if request.method == "POST":
+        form = forms.EventForm(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('events'))
+    else:
+        form = forms.EventForm(instance=event)
+    return render(request, 'eventsinfo/edit_eventinfo.html', {'form': form, 'infos': event})
+
+def del_info(request, info_id):
+    event = models.EventsInfo.objects.get(id=info_id)
+    event.delete()
+    return HttpResponseRedirect(reverse('events'))

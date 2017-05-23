@@ -10,7 +10,7 @@
     <h4 class="lead">Подробнее о: {{ hall.hall_name }}</h4>
     <form class="form-horizontal" method="post" action="{% url 'edit_hall' hall.id %}">
         {% csrf_token %}
-        {% include 'inc-client.html' %}
+        {% include 'inc-admin_form.html' %}
     </form>
 </div>
 

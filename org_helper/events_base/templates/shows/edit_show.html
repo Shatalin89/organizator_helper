@@ -10,7 +10,7 @@
     <h4 class="lead">Подробнее о: {{ shows.shows_names }}</h4>
     <form class="form-horizontal" method="post" action="{% url 'edit_show' shows.id %}">
         {% csrf_token %}
-        {% include 'shows/inc-show.html' %}
+        {% include 'inc-admin_form.html' %}
     </form>
 </div>
 
