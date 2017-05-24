@@ -104,4 +104,4 @@ def del_info(request, info_id):
     return HttpResponseRedirect(reverse('events'))
 
 def reg_client(request):
-    pass
+    event_active = models.EventsInfo.objects.get(event_state=True)
