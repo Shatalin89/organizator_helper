@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ infos.events_show_name }}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-10">
+    <h4 class="lead">Подробнее о: {{ infos.events_show_name }}</h4>
+    <form class="form-horizontal" method="post" action="{% url 'edit_event' infos.id %}">
+        {% csrf_token %}
+        {% include 'inc-admin_form.html' %}
+    </form>
+</div>
+
+<script src="{% static 'js/bootstrap-formhelpers-phone.js' %}"></script>
+{% endblock %}

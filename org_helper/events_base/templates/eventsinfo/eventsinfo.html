@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+        Список мероприятий
+{% endblock %}
+
+{% block content %}
+    {% load staticfiles %}
+
+    <div class="col-md-10">
+        <table id="halls_list" class="table-striped table">
+            <h4 class="lead">Список мероприятий</h4>
+            <tr>
+                <th class="col-xs-2">Название</th>
+                <th class="col-xs-1">Афиша</th>
+                <th class="col-xs-1">Дата</th>
+                <th class="col-xs-1">Расчитано на</th>
+                <th class="col-xs-1">Занято мест</th>
+                <th class="col-xs-2">Ссылка на ВК</th>
+                <th class="col-xs-1">Ред.</th>
+                <th class="col-xs-1">Удалить</th>
+            </tr>
+            {% if infos %}
+                {% for info in infos %}
+            <tr>
+                <td class="col-xs-2">{{ info.events_show_name }}</td>
+                <td class="col-xs-1">{{ info.events_show_name.shows_image }}</td>
+                <td class="col-xs-1">{{ info.events_date_time }}</td>
+                <td class="col-xs-1">{{ info.event_place_count }}</td>
+                <td class="col-xs-1">{{ info.event_place_current_count }}</td>
+                <td class="col-xs-2">{{ info.event_vk_url }}</td>
+                <td class="col-xs-1"><a href="{% url 'edit_event' info.id %}"><img width="20px" height="20px" src="{% static '/icon/edit.png' %}"></a></td>
+                <td class="col-xs-1"><a href="{% url 'del_event' info.id %}"><img width="20px" height="20px" src="{% static '/icon/del.png' %}"></a></td>
+            </tr>
+                {% endfor%}
+            {% endif %}
+            <tr><td colspan="7"><a href="{% url 'event' %}">Добавить мероприятие</a></td></tr>
+        </table>
+    </div>
+{% endblock %}
