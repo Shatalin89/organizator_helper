@@ -102,3 +102,6 @@ def del_info(request, info_id):
     event = models.EventsInfo.objects.get(id=info_id)
     event.delete()
     return HttpResponseRedirect(reverse('events'))
+
+def reg_client(request):
+    pass

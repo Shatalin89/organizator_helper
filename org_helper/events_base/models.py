@@ -38,7 +38,7 @@ class EventsInfo(models.Model):
     event_place_count = models.IntegerField(default=15)
     event_place_current_count = models.IntegerField(default=0)
     event_vk_url = models.URLField(blank=True, null=True)
-
+    event_state = models.BooleanField(default=False)
 
 class EventPlace(models.Model):
     class Meta:
