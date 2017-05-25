@@ -8,26 +8,26 @@ class ClientForm(forms.ModelForm):
                                  widget=forms.TextInput(attrs={'placeholder': 'Фамилия', 'class': 'form-control'}))
     first_name = forms.CharField(label=u'Имя',
                                  widget=forms.TextInput(attrs={'placeholder': 'Имя', 'class': 'form-control'}))
-    middle_name = forms.CharField(label=u'Отчество',
+    middle_name = forms.CharField(label=u'Отчество', required = False,
                                  widget=forms.TextInput(attrs={'placeholder': 'Отчество', 'class': 'form-control'}))
-    date_birthday = forms.DateField(label=u'Дата рождения',
+    date_birthday = forms.DateField(label=u'Дата рождения', required = False,
                                  widget=forms.DateInput(attrs={'class': 'form-control date',
                                                               'id': 'datetimepicker1'}))
     phone = forms.CharField(label=u'Телефон', widget=forms.TextInput(attrs={'class': 'form-control bfh-phone',
                                                                             'data-format': '+7 (ddd) ddd-dddd',
                                                                             'pattern': '(\+[\d\ \(\)\-]{16})',
                                                                             'type':'tel'}))
-    email = forms.CharField(label=u'Почта',
+    email = forms.CharField(label=u'Почта', required = False,
                             widget=forms.TextInput(attrs={'placeholder': 'Почта',
                                                             'class': 'form-control',
                                                             'type': 'email'}))
-    description = forms.CharField(label=u'О клиенте',
+    description = forms.CharField(label=u'О клиенте', required = False,
                                  widget=forms.Textarea(attrs={'placeholder': 'Комментарий о клиенте', 'class': 'form-control'}))
-    vk_id = forms.URLField(label=u'ссылка на ВК',
+    vk_id = forms.URLField(label=u'ссылка на ВК', required = False,
                                  widget=forms.URLInput(attrs={'placeholder': 'vk.com', 'class': 'form-control'}))
-    fb_id = forms.URLField(label=u'ссылка на FB',
+    fb_id = forms.URLField(label=u'ссылка на FB', required = False,
                                  widget=forms.URLInput(attrs={'placeholder': 'facebook.com', 'class': 'form-control'}))
-    insta_id = forms.URLField(label=u'Ссылка в истаграмм',
+    insta_id = forms.URLField(label=u'Ссылка в истаграмм', required = False,
                                  widget=forms.URLInput(attrs={'placeholder': 'instagram.com', 'class': 'form-control'}))
 
     class Meta:

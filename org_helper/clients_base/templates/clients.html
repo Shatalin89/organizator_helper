@@ -26,15 +26,22 @@
                         <td class="col-xs-1">{{ client.phone }}</td>
                         <td class="col-xs-2">{{ client.email }}</td>
                         <td class="col-xs-3">{{ client.description }}</td>
-                        <td class="col-xs-2"><a href="{{ client.fb_id }}" target="_blank" class="btn btn-social-icon btn-xs btn-facebook">
+                        <td class="col-xs-2">
+                                {% if client.fb_id %}
+                                            <a href="{{ client.fb_id }}" target="_blank" class="btn btn-social-icon btn-xs btn-facebook">
                                                 <span class="fa fa-facebook"></span>
                                             </a>
+                                {% endif %}
+                                {% if client.vk_id  %}
                                             <a href="{{ client.vk_id }}" target="_blank" class="btn btn-social-icon btn-xs btn-vk">
                                                 <span class="fa fa-vk"></span>
                                             </a>
+                                {% endif %}
+                                {% if client.insta_id %}
                                             <a href="{{ client.insta_id }}" target="_blank" class="btn btn-social-icon btn-xs btn-instagram">
                                                 <span class="fa fa-instagram"></span>
                                             </a>
+                                {% endif %}
                         </td>
                         <td class="col-xs-1"><a href="{% url 'edit_client' client.id %}"><img width="20px" height="20px" src="{% static '/icon/edit.png' %}"></a></td>
                         <td class="col-xs-1"><a href="{% url 'del_client' client.id %}"><img width="20px" height="20px" src="{% static '/icon/del.png' %}"></a></td>

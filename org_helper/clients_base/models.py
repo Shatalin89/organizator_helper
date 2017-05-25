@@ -10,8 +10,8 @@ class Clients(models.Model):
         db_table = 'clients'
     last_name = models.CharField(max_length=30)
     first_name = models.CharField(max_length=30)
-    middle_name = models.CharField(max_length=30, blank=True)
-    date_birthday = models.DateField(blank=True)
+    middle_name = models.CharField(max_length=30, blank=True, null=True)
+    date_birthday = models.DateField(blank=True, null=True)
     phone = PhoneNumberField(blank=True)
     email = models.EmailField(blank=True)
     description = models.TextField(max_length=300, blank=True)

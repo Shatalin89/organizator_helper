@@ -5,8 +5,8 @@ from . import models
 class HallForm(forms.ModelForm):
     hall_name = forms.CharField(label=u'Название',
                                  widget=forms.TextInput(attrs={'placeholder': 'Название зала', 'class': 'form-control'}))
-    hall_address = forms.CharField(label=u'адрес', required = False,
-                                 widget=forms.TextInput(attrs={'placeholder': 'Адрес', 'class': 'form-control'}))
+    hall_address = forms.CharField(label=u'Адрес', required = False,
+                                 widget=forms.TextInput(attrs={'placeholder': 'ул. Советская, д. 12, оф. 14', 'class': 'form-control'}))
     hall_max_places = forms.CharField(label=u'Вместимость',required = False,
                                  widget=forms.TextInput(attrs={'placeholder': 'кол-во. мест', 'class': 'form-control'}))
 
