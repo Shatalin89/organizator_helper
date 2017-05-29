@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f8f8eb84-3993-4ff7-b6a4-eaf694cbfed4" name="Default" comment="add template for reg client">
+    <list default="true" id="f8f8eb84-3993-4ff7-b6a4-eaf694cbfed4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org_helper/clients_base/templates/client.html" afterPath="$PROJECT_DIR$/org_helper/clients_base/templates/client.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org_helper/clients_base/templates/clients.html" afterPath="$PROJECT_DIR$/org_helper/clients_base/templates/clients.html" />
@@ -1016,7 +1016,7 @@
         <state relative-caret-position="703">
           <caret line="40" column="15" lean-forward="false" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="15" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1026,7 +1026,7 @@
         <state relative-caret-position="133">
           <caret line="8" column="105" lean-forward="false" selection-start-line="8" selection-start-column="105" selection-end-line="8" selection-end-column="105" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#0#24#0" expanded="false" />
           </folding>
         </state>
       </provider>

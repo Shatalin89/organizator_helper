@@ -16,11 +16,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from main_helper.views import index
+from main_helper.views import index, main_org
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', index),
+    url(r'^admin/', index, name='admin'),
+    url(r'^main/$', main_org, name='main_org'),
     url(r'^clients/', include('clients_base.urls')),
     url(r'^events/', include('events_base.urls')),
 ]

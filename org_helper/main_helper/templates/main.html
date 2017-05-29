@@ -33,8 +33,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Главная</a>
+                <a class="navbar-brand" href="{% url 'main_org'%}">Главная</a>
             </div>
+             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{% url 'admin' %}">Админка</a>
+                    </li>
+                </ul>
+             </div>
+
         </div>
         <!-- /.container -->
     </nav>
@@ -43,7 +51,7 @@
     <div class="container">
         <div class="row">
             {% block category %}
-                {% include 'inc-category.html' %}
+                    {% include 'inc-main_category.html' %}
             {% endblock %}
 
             {% block content %}
