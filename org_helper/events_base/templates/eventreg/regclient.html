@@ -11,16 +11,32 @@
 
 
 <div class="col-md-10">
-    <div class="panel-group">
-      <div class="panel panel-default">
-            <div class="panel-body">
-                
-            </div>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-body">Panel Content</div>
-      </div>
+    <div id="scroll" data-target="#myScrollspy" data-offset="1">
+        <div class="panel-group">
+          <div class="panel panel-default">
+                <div class="panel-body">
+                    <table id="halls_list" class="table-striped table">
+                        <h4 class="lead">Список мероприятий</h4>
+                        <tr>
+                            <th class="col-xs-2">Название</th>
+                            <th class="col-xs-1">Афиша</th>
+                            <th class="col-xs-1">Дата</th>
+                        </tr>
+                        {% if infos %}
+                            {% for info in infos %}
+                        <tr>
+                            <td class="col-xs-2">{{ info.events_show_name }}</td>
+                            <td class="col-xs-1">{{ info.events_show_name.shows_image }}</td>
+                            <td class="col-xs-1">{{ info.events_date_time }}</td>
+                        </tr>
+                            {% endfor%}
+                        {% endif %}
+
+                    </table>
+                </div>
+          </div>
+
+        </div>
     </div>
 </div>
-
 {% endblock %}
