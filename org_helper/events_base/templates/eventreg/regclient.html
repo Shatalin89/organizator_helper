@@ -12,31 +12,62 @@
 
 <div class="col-md-10">
     <div id="scroll" data-target="#myScrollspy" data-offset="1">
-        <div class="panel-group">
-          <div class="panel panel-default">
-                <div class="panel-body">
-                    <table id="halls_list" class="table-striped table">
-                        <h4 class="lead">Список мероприятий</h4>
-                        <tr>
-                            <th class="col-xs-2">Название</th>
-                            <th class="col-xs-1">Афиша</th>
-                            <th class="col-xs-1">Дата</th>
-                        </tr>
-                        {% if infos %}
-                            {% for info in infos %}
-                        <tr>
-                            <td class="col-xs-2">{{ info.events_show_name }}</td>
-                            <td class="col-xs-1">{{ info.events_show_name.shows_image }}</td>
-                            <td class="col-xs-1">{{ info.events_date_time }}</td>
-                        </tr>
-                            {% endfor%}
-                        {% endif %}
+        <form method="post" action="{% url 'add_reg' %}">
+            {% csrf_token %}
+            <div class="panel-group">
+              <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table id="show_info" class="table-striped table">
+                            <h4 class="lead">Список мероприятий</h4>
+                            <tr>
+                                <th class="col-xs-1">выбор</th>
+                                <th class="col-xs-2">Название</th>
+                                <th class="col-xs-1">Афиша</th>
+                                <th class="col-xs-1">Дата</th>
+                            </tr>
+                            {% if infos %}
+                                {% for info in infos %}
+                            <tr>
+                                <td><input class="col-xs-1" type="checkbox" value="{{ info.pk }}"></td>
+                                <td class="col-xs-2">{{ info.events_show_name }}</td>
+                                <td class="col-xs-1">{{ info.events_show_name.shows_image }}</td>
+                                <td class="col-xs-1">{{ info.events_date_time }}</td>
+                            </tr>
+                                {% endfor%}
+                            {% endif %}
+                        </table>
+                    </div>
 
-                    </table>
+              </div>
+             <div class="panel panel-default">
+                   <div class="panel-body">
+                       <table id="client_list" class="table-striped table">
+                           {% for client in client_list %}
+                                <tr>
+                                {% if client.0 %}
+                                    <td class="col-xs-4"><input name="client_{{ client.0.pk }}"  type="checkbox" value="{{ client.0.pk }}">
+                                    {{ client.0.get_fio_phone }}</td>
+                                {% endif %}
+                                {% if client.1 %}
+                                    <td class="col-xs-4"><input name="client_{{ client.1.pk }}" type="checkbox" value="{{ client.1.pk }}">
+                                    {{ client.1.get_fio_phone }}</td>
+                                {% endif %}
+                                {% if client.2 %}
+                                    <td class="col-xs-4"><input name="client_{{ client.2.pk }}" type="checkbox" value="{{ client.2.pk }}">
+                                    {{ client.2.get_fio_phone }}</td>
+                                {% endif %}
+                                </tr>
+                           {% endfor %}
+                       </table>
+                   </div>
+              </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-5 col-sm-10">
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </div>
-          </div>
-
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 {% endblock %}

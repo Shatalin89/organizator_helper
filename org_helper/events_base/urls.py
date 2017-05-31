@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^info/del/(?P<info_id>\d+)/$', views.del_info, name='del_event'),
 
     url(r'^reg/$', views.reg_client, name='reg_client'),
+    url(r'^reg/add$', views.add_reg, name='add_reg'),
 
 ]

@@ -105,4 +105,25 @@ def del_info(request, info_id):
 
 def reg_client(request):
     infos = models.EventsInfo.objects.filter(event_state=True)
-    return render(request, 'eventreg/regclient.html', {'infos': infos})
+    clients = models.Clients.objects.all()
+    client_list = []
+    j = 0
+    z = 0
+    tmp = {}
+    for i in clients:
+        tmp[j] = i
+        j += 1
+        if j == 3:
+            j = 0
+            client_list.append(tmp)
+            tmp = {}
+    if j != 0:
+        client_list.append(tmp)
+
+
+    return render(request, 'eventreg/regclient.html', {'infos': infos, 'client_list': client_list})
+
+def add_reg(request):
+    for i in request.POST:
+        print(i)
+    return render(request, 'eventreg/regclient.html')

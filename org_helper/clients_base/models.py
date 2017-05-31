@@ -23,8 +23,10 @@ class Clients(models.Model):
     def get_fio(self):
         return '{0} {1}.{2}.'.format(self.last_name, self.first_name[:1], self.middle_name[:1])
 
+    def get_fio_phone(self):
+        return '{0} ({1})'.format(self.get_fio(), self.phone)
 
-
-
+    def __str__(self):
+        return self.get_fio()
 
 
