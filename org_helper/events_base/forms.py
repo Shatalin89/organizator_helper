@@ -38,3 +38,11 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = models.EventsInfo
         exclude = []
+
+
+class EventRegForm(forms.ModelForm):
+    event = forms.ModelMultipleChoiceField
+    client = forms.ModelMultipleChoiceField()
+    class Meta:
+        model = models.EventPlace
+        exclude = ['date_add', 'date_change', 'place_status']

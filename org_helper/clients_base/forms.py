@@ -23,11 +23,11 @@ class ClientForm(forms.ModelForm):
                                                             'type': 'email'}))
     description = forms.CharField(label=u'О клиенте', required = False,
                                  widget=forms.Textarea(attrs={'placeholder': 'Комментарий о клиенте', 'class': 'form-control'}))
-    vk_id = forms.URLField(label=u'ссылка на ВК', required = False,
+    vk_id = forms.URLField(label=u'ссылка на ВК', initial='http://', required = False,
                                  widget=forms.URLInput(attrs={'placeholder': 'vk.com', 'class': 'form-control'}))
-    fb_id = forms.URLField(label=u'ссылка на FB', required = False,
+    fb_id = forms.URLField(label=u'ссылка на FB', initial='http://', required = False,
                                  widget=forms.URLInput(attrs={'placeholder': 'facebook.com', 'class': 'form-control'}))
-    insta_id = forms.URLField(label=u'Ссылка в истаграмм', required = False,
+    insta_id = forms.URLField(label=u'Ссылка в истаграмм', initial='http://', required = False,
                                  widget=forms.URLInput(attrs={'placeholder': 'instagram.com', 'class': 'form-control'}))
 
     class Meta:

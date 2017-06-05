@@ -28,9 +28,9 @@
                             {% if infos %}
                                 {% for info in infos %}
                             <tr>
-                                <td><input class="col-xs-1" type="checkbox" value="{{ info.pk }}"></td>
+                                <td><input class="col-xs-1" name="event_{{ info.pk }}" type="checkbox" value="{{ info.pk }}"></td>
                                 <td class="col-xs-2">{{ info.events_show_name }}</td>
-                                <td class="col-xs-1">{{ info.events_show_name.shows_image }}</td>
+                                <td class="col-xs-1"><img src="{{ info.events_show_name.shows_image }}"></td>
                                 <td class="col-xs-1">{{ info.events_date_time }}</td>
                             </tr>
                                 {% endfor%}

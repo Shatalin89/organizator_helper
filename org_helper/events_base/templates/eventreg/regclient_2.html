@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+        Главная
+{% endblock %}
+
+
+{% block content %}
+    {% load staticfiles %}
+<div class="col-md-10">
+<form method="post" enctype="multipart/form-data" action="{% url 'reg_client' %}">
+    {% csrf_token %}
+
+    {% for form in forms %}
+       {{ form }}
+       <hr/>
+    {% endfor %}
+
+    <input type="submit">
+</form>
+</div>
+{% endblock %}

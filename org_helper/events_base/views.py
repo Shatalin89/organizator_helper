@@ -1,5 +1,8 @@
+from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.views.generic.base import TemplateResponseMixin, View
+
 from . import models
 from . import forms
 from django.urls import reverse
@@ -119,11 +122,33 @@ def reg_client(request):
             tmp = {}
     if j != 0:
         client_list.append(tmp)
-
-
     return render(request, 'eventreg/regclient.html', {'infos': infos, 'client_list': client_list})
 
 def add_reg(request):
-    for i in request.POST:
-        print(i)
-    return render(request, 'eventreg/regclient.html')
+    if request.method == 'POST':
+        form = forms.EventRegForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('events'))
+    else:
+        form = forms.EventRegForm()
+    return render(request, 'eventreg/regclient_2.html', {'forms': form})
+
+
+class RegCLient(TemplateResponseMixin, View):
+    template_name = 'eventreg/regclient_2.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        FS = modelformset_factory(forms.EventRegForm, extra=1)
+        queryset = models.EventPlace.objects.all()
+
+        if request.method == 'POST':
+            formset = FS(request.POST, request.FILES)
+
+            if formset.is_valid():
+                formset.save()
+                formset = FS(queryset=queryset)
+
+        else:
+            formset = FS(queryset=queryset)
+        return self.render_to_response({'forms': forms})
