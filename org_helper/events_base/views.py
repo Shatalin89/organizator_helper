@@ -106,49 +106,32 @@ def del_info(request, info_id):
     event.delete()
     return HttpResponseRedirect(reverse('events'))
 
-def reg_client(request):
+def reg_view(request):
+    list_event=[]
     infos = models.EventsInfo.objects.filter(event_state=True)
-    clients = models.Clients.objects.all()
-    client_list = []
-    j = 0
-    z = 0
-    tmp = {}
-    for i in clients:
-        tmp[j] = i
-        j += 1
-        if j == 3:
-            j = 0
+    for i in infos:
+        clients = models.EventPlace.objects.filter(event=i)
+        client_list = []
+        j = 0
+        z = 0
+        tmp = {}
+        for m in clients:
+            tmp[j] = m
+            j += 1
+            if j == 3:
+                j = 0
+                client_list.append(tmp)
+                tmp = {}
+        if j != 0:
             client_list.append(tmp)
-            tmp = {}
-    if j != 0:
-        client_list.append(tmp)
-    return render(request, 'eventreg/regclient.html', {'infos': infos, 'client_list': client_list})
-
-def add_reg(request):
-    if request.method == 'POST':
-        form = forms.EventRegForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('events'))
-    else:
-        form = forms.EventRegForm()
-    return render(request, 'eventreg/regclient_2.html', {'forms': form})
+        reg_list = {'event': i, 'client': client_list}
+        list_event.append(reg_list)
+    print(list_event)
+    return render(request, 'eventreg/regclient.html', {'list_event': list_event})
 
 
-class RegCLient(TemplateResponseMixin, View):
-    template_name = 'eventreg/regclient_2.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        FS = modelformset_factory(forms.EventRegForm, extra=1)
-        queryset = models.EventPlace.objects.all()
 
-        if request.method == 'POST':
-            formset = FS(request.POST, request.FILES)
+def reg_add(request, event_id):
+    pass
 
-            if formset.is_valid():
-                formset.save()
-                formset = FS(queryset=queryset)
-
-        else:
-            formset = FS(queryset=queryset)
-        return self.render_to_response({'forms': forms})

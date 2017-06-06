@@ -1,6 +1,6 @@
 from django import forms
 from . import models
-
+from clients_base.models import Clients
 
 class HallForm(forms.ModelForm):
     hall_name = forms.CharField(label=u'Название',
@@ -41,8 +41,10 @@ class EventForm(forms.ModelForm):
 
 
 class EventRegForm(forms.ModelForm):
-    event = forms.ModelMultipleChoiceField
-    client = forms.ModelMultipleChoiceField()
+    event = forms.ModelMultipleChoiceField(queryset=models.EventsInfo.objects.filter(event_state=True))
+    client = forms.ModelMultipleChoiceField(queryset=Clients.objects.all())
+
+
     class Meta:
         model = models.EventPlace
         exclude = ['date_add', 'date_change', 'place_status']
