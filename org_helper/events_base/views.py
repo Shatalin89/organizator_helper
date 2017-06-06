@@ -124,7 +124,7 @@ def reg_view(request):
                 tmp = {}
         if j != 0:
             client_list.append(tmp)
-        reg_list = {'event': i, 'client': client_list}
+        reg_list = {'event': i, 'client_list': client_list}
         list_event.append(reg_list)
     print(list_event)
     return render(request, 'eventreg/regclient.html', {'list_event': list_event})

@@ -39,19 +39,16 @@
                     </div>
                    <div class="panel-body">
                        <table id="client_list" class="table-striped table">
-                           {% for client in client_list %}
+                           {% for client in list.client_list %}
                                 <tr>
                                 {% if client.0 %}
-                                    <td class="col-xs-4"><input name="client_{{ client.0.pk }}"  type="checkbox" value="{{ client.0.pk }}">
-                                    {{ client.0.get_fio_phone }}</td>
+                                    <td class="col-xs-4">{{ client.0.get_fio_phone }}</td>
                                 {% endif %}
                                 {% if client.1 %}
-                                    <td class="col-xs-4"><input name="client_{{ client.1.pk }}" type="checkbox" value="{{ client.1.pk }}">
-                                    {{ client.1.get_fio_phone }}</td>
+                                    <td class="col-xs-4">{{ client.1.get_fio_phone }}</td>
                                 {% endif %}
                                 {% if client.2 %}
-                                    <td class="col-xs-4"><input name="client_{{ client.2.pk }}" type="checkbox" value="{{ client.2.pk }}">
-                                    {{ client.2.get_fio_phone }}</td>
+                                    <td class="col-xs-4">{{ client.2.get_fio_phone }}</td>
                                 {% endif %}
                                 </tr>
                            {% endfor %}
