@@ -2,6 +2,8 @@ from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateResponseMixin, View
+from clients_base.models import Clients
+from django.utils import timezone
 
 from . import models
 from . import forms
@@ -135,3 +137,29 @@ def reg_view(request):
 def reg_add(request, event_id):
     pass
 
+def reg_view_form(request):
+
+
+    if request.method == 'POST':
+        for i in request.POST.getlist('event'):
+            event = models.EventsInfo.objects.get(pk=i)
+            for j in request.POST.getlist('client'):
+                try:
+                    regclient = models.EventPlace(event=event, \
+                                                  client=Clients.objects.get(pk=j), \
+                                                  place_price=request.POST['place_price'], \
+                                                  place_status=request.POST['place_status'], \
+                                                  date_add=timezone.now(), \
+                                                  date_change=timezone.now(), \
+                                                  comment=request.POST['comment'], \
+                                                  )
+                    regclient.save()
+                except:
+                    print('errror')
+
+        form = forms.EventRegForm()
+        return render(request, 'eventreg/regclient_2.html', {'forms': form})
+
+    else:
+        form = forms.EventRegForm()
+    return render(request, 'eventreg/regclient_2.html', {'forms': form})

@@ -1,6 +1,7 @@
 from django import forms
 from . import models
 from clients_base.models import Clients
+from djmoney.models.fields import MoneyField
 
 class HallForm(forms.ModelForm):
     hall_name = forms.CharField(label=u'Название',
@@ -41,10 +42,17 @@ class EventForm(forms.ModelForm):
 
 
 class EventRegForm(forms.ModelForm):
-    event = forms.ModelMultipleChoiceField(queryset=models.EventsInfo.objects.filter(event_state=True))
-    client = forms.ModelMultipleChoiceField(queryset=Clients.objects.all())
+    CLIENTS_LIST= [[i.pk, i.get_fio_phone] for i in Clients.objects.all()]
+    EVENT_LIST=[[i.pk, i.get_event] for i in models.EventsInfo.objects.filter(event_state=True)]
+    PLACE_STATUS = (('FREE', 'Свободно'), ('BRON', 'Предварительная запись'), ('RESV', 'Пред. оплата'), ('SOLD', 'Оплачено'))
 
-
+    event = forms.MultipleChoiceField(label='Мероприятия', required=False, widget=forms.CheckboxSelectMultiple, choices=EVENT_LIST)
+    client = forms.MultipleChoiceField(label='Клиенты', required=False, widget=forms.CheckboxSelectMultiple, choices=CLIENTS_LIST)
+    place_status = forms.ChoiceField(choices=PLACE_STATUS)
+    comment = forms.CharField(required = False, widget=forms.Textarea)
+    place_price = MoneyField(max_digits=10, decimal_places=2, default_currency='RUB')
     class Meta:
         model = models.EventPlace
+
         exclude = ['date_add', 'date_change', 'place_status']
+

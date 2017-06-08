@@ -2,6 +2,8 @@ from django.db import models
 from clients_base.models import Clients
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils import timezone
+from djmoney.models.fields import MoneyField
+
 
 class Hall(models.Model):
     class Meta:
@@ -40,12 +42,15 @@ class EventsInfo(models.Model):
     event_vk_url = models.URLField(blank=True, null=True)
     event_state = models.BooleanField(default=False)
 
+    def get_event(self):
+        return '{0} {1}'.format(self.events_show_name, self.events_date_time)
+
 class EventPlace(models.Model):
     class Meta:
         db_table = 'eventplace'
     event = models.ForeignKey(EventsInfo)
     client = models.ForeignKey(Clients, blank=True, null=True)
-    place_price = models.IntegerField(default=1)
+    place_price = models.IntegerField(default=0)
     place_status = models.CharField(max_length=4, default='FREE')
     date_add = models.DateTimeField(default=timezone.now())
     date_change = models.DateTimeField()
