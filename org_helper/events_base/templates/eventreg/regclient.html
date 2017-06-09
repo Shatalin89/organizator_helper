@@ -16,51 +16,48 @@
             {% csrf_token %}
             <div class="panel-group">
                 {% if list_event %}
+                   <h4 class="lead">Список мероприятий</h4>
                     {% for list in list_event %}
                     <div class="panel panel-default">
-                        <div class="panel-body">
+                        <div class="panel panel-body">
                             <table id="show_info" class="table-striped table">
-                                <h4 class="lead">Список мероприятий</h4>
+
                                 <tr>
                                     <th class="col-xs-2">Название</th>
                                     <th class="col-xs-1">Афиша</th>
                                     <th class="col-xs-1">Дата</th>
                                 </tr>
-
                                 <tr>
                                     <td class="col-xs-2"><a href="{% url 'reg_client' list.event.pk %}">{{ list.event.events_show_name }}</a></td>
                                     <td class="col-xs-1"><img src="{{ list.event.events_show_name.shows_image }}"></td>
                                     <td class="col-xs-1">{{ list.event.events_date_time }}</td>
                                 </tr>
-                                    {% endfor%}
-                                {% endif %}
-                            </table>
-                        </div>
-                    </div>
-                   <div class="panel-body">
-                       <table id="client_list" class="table-striped table">
-                           {% for client in list.client_list %}
-                                <tr>
-                                {% if client.0 %}
-                                    <td class="col-xs-4">{{ client.0.get_fio_phone }}</td>
-                                {% endif %}
-                                {% if client.1 %}
-                                    <td class="col-xs-4">{{ client.1.get_fio_phone }}</td>
-                                {% endif %}
-                                {% if client.2 %}
-                                    <td class="col-xs-4">{{ client.2.get_fio_phone }}</td>
-                                {% endif %}
-                                </tr>
-                           {% endfor %}
-                       </table>
-                   </div>
 
+                            </table>
+                           <table id="client_list" class="table-striped table">
+                                   <tr>
+                                       <th class="col-xs-2">Клиент</th>
+                                       <th class="col-xs-1">Статус</th>
+                                       <th class="col-xs-1">баланс</th>
+                                   </tr>
+                               {% for place in list.places %}
+                                   <tr>
+                                       <td class="col-xs-4">{{ place.client.get_fio_phone }}</td>
+                                       <td class="col-xs-2">{{ place.place_status }}</td>
+                                       <td class="col-xs-1">{{ place.place_price }}</td>
+                                   </tr>
+                               {% endfor %}
+                           </table>
+                            <tr>
+                                <td class="col-xs-4"><a href="#">Записать человека</a></td>
+                            </tr>
+                       </div>
+
+                    </div>
+                 {% endfor %}
+                {% endif %}
             </div>
-            <div class="form-group">
-                <div class="col-sm-offset-5 col-sm-10">
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </div>
-            </div>
+
         </form>
     </div>
 </div>

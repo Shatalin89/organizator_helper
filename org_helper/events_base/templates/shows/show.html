@@ -10,11 +10,11 @@
 
 <div class="col-md-10">
     <h4 class="lead">Новое мероприятие</h4>
-    <form class="form-horizontal" method="post" action="{% url 'show' %}">
+    <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{% url 'show' %}">
         {% csrf_token %}
         {% include 'inc-admin_form.html' %}
     </form>
 </div>
-{% include 'inc-time_picker.html' %}
+
 <script src="{% static 'js/bootstrap-formhelpers-phone.js' %}"></script>
 {% endblock %}

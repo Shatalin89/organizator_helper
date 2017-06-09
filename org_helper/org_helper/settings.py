@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'clients_base',
     'events_base',
     'main_helper',
+    'django_select2',
 ]
 
 MIDDLEWARE = [

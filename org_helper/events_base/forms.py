@@ -42,7 +42,8 @@ class EventForm(forms.ModelForm):
 
 
 class EventRegForm(forms.ModelForm):
-    CLIENTS_LIST= [[i.pk, i.get_fio_phone] for i in Clients.objects.all()]
+
+    CLIENTS_LIST=[[i.pk, i.get_fio_phone] for i in Clients.objects.all()]
     EVENT_LIST=[[i.pk, i.get_event] for i in models.EventsInfo.objects.filter(event_state=True)]
     PLACE_STATUS = (('FREE', 'Свободно'), ('BRON', 'Предварительная запись'), ('RESV', 'Пред. оплата'), ('SOLD', 'Оплачено'))
 
@@ -53,6 +54,5 @@ class EventRegForm(forms.ModelForm):
     place_price = MoneyField(max_digits=10, decimal_places=2, default_currency='RUB')
     class Meta:
         model = models.EventPlace
-
         exclude = ['date_add', 'date_change', 'place_status']
 

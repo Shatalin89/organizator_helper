@@ -111,23 +111,10 @@ def del_info(request, info_id):
 def reg_view(request):
     list_event=[]
     infos = models.EventsInfo.objects.filter(event_state=True)
+
     for i in infos:
-        clients = models.EventPlace.objects.filter(event=i)
-        client_list = []
-        j = 0
-        z = 0
-        tmp = {}
-        for m in clients:
-            tmp[j] = m
-            j += 1
-            if j == 3:
-                j = 0
-                client_list.append(tmp)
-                tmp = {}
-        if j != 0:
-            client_list.append(tmp)
-        reg_list = {'event': i, 'client_list': client_list}
-        list_event.append(reg_list)
+        places = models.EventPlace.objects.filter(event=i)
+        list_event.append({'event':i, 'places': places})
     print(list_event)
     return render(request, 'eventreg/regclient.html', {'list_event': list_event})
 
@@ -141,25 +128,28 @@ def reg_view_form(request):
 
 
     if request.method == 'POST':
-        for i in request.POST.getlist('event'):
-            event = models.EventsInfo.objects.get(pk=i)
-            for j in request.POST.getlist('client'):
-                try:
-                    regclient = models.EventPlace(event=event, \
-                                                  client=Clients.objects.get(pk=j), \
-                                                  place_price=request.POST['place_price'], \
-                                                  place_status=request.POST['place_status'], \
-                                                  date_add=timezone.now(), \
-                                                  date_change=timezone.now(), \
-                                                  comment=request.POST['comment'], \
-                                                  )
-                    regclient.save()
-                except:
-                    print('errror')
+        if request.POST.getlist('event') and request.POST.getlist('client'):
+            for i in request.POST.getlist('event'):
+                event = models.EventsInfo.objects.get(pk=i)
+                for j in request.POST.getlist('client'):
+                    try:
+                        regclient = models.EventPlace(event=event, \
+                                                      client=Clients.objects.get(pk=j), \
+                                                      place_price=request.POST['place_price'], \
+                                                      place_status=request.POST['place_status'], \
+                                                      date_add=timezone.now(), \
+                                                      date_change=timezone.now(), \
+                                                      comment=request.POST['comment'], \
+                                                      )
+                        regclient.save()
+                    except:
+                        print('errror')
 
         form = forms.EventRegForm()
         return render(request, 'eventreg/regclient_2.html', {'forms': form})
 
     else:
+        CLIENT_LIST=[[i.pk, i.get_fio_phone] for i in Clients.objects.all()]
+        EVENT_LIST = [[i.pk, i.get_event] for i in models.EventsInfo.objects.filter(event_state=True)]
         form = forms.EventRegForm()
     return render(request, 'eventreg/regclient_2.html', {'forms': form})
